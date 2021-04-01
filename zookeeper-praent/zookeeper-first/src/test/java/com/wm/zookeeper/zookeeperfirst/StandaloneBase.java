@@ -3,11 +3,16 @@ package com.wm.zookeeper.zookeeperfirst;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
+import org.apache.zookeeper.ZooDefs;
 import org.apache.zookeeper.ZooKeeper;
+import org.apache.zookeeper.data.ACL;
+import org.apache.zookeeper.data.Id;
+import org.apache.zookeeper.server.auth.DigestAuthenticationProvider;
 import org.junit.After;
 import org.junit.Before;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -44,6 +49,8 @@ public class StandaloneBase {
         try {
             log.info("start to connect to zookeeper server: {}", getConnectStr());
             zooKeeper = new ZooKeeper(getConnectStr(), getTimeOut(), watcher);
+            // 添加授权 访问不授权的则不需要添加
+            zooKeeper.addAuthInfo("digest", "wangm:111111".getBytes());
             log.info("连接中...");
             countDownLatch.await();
 

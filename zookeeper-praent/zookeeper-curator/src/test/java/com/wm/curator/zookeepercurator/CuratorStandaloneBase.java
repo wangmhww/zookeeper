@@ -62,15 +62,15 @@ public class CuratorStandaloneBase {
         return curatorFramework;
     }
 
-    public static String getConnectStr() {
+    public String getConnectStr() {
         return CONNECT_STR;
     }
 
-    public static int getSessionTimeoutMs() {
+    public int getSessionTimeoutMs() {
         return sessionTimeoutMs;
     }
 
-    public static int getConnectTimeoutMs() {
+    public int getConnectTimeoutMs() {
         return connectTimeoutMs;
     }
 }
